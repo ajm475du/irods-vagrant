@@ -5,7 +5,7 @@ IRODS_URL=ftp://ftp.renci.org/pub/irods/releases/4.0.0/$IRODS_DEB
 PLUGIN_DEB=irods-database-plugin-postgres-1.0.deb
 PLUGIN_URL=ftp://ftp.renci.org/pub/irods/releases/4.0.0/$PLUGIN_DEB
 IRODS_HOME=/var/lib/irods/iRODS
-IRODS_ETC=/etc/irods
+IRODS_USER=irods
 
 set -v
 
@@ -18,9 +18,10 @@ if [ ! -e $IRODS_HOME/.irodsprovisioned ]; then
     [ -e $IRODS_DEB  ] || wget -q $IRODS_URL
     [ -e $PLUGIN_DEB ] || wget -q $PLUGIN_URL
     dpkg -i $IRODS_DEB $PLUGIN_DEB
+    cd -
 
-    su -c 'mkdir /tmp/irods' - irods
-    su -c 'touch /tmp/irods/setup_database.flag' - irods
+    su -c 'mkdir /tmp/irods' - ${IRODS_USER}
+    su -c 'touch /tmp/irods/setup_database.flag' - ${IRODS_USER}
     cp /vagrant/irods.config /etc/irods/irods.config
 
     # Use system-wide postgresql for iRODS
@@ -39,10 +40,12 @@ EOT
 
     sed -i -e 's/ \( read [^-]\)/ [ $YES ] ||\1/' ~irods/packaging/setup_database.sh
 
-    su -c "echo 'YMLh1qJKTDbS' | YES=1 ./packaging/setup_database.sh" - irods
+    su -c "echo 'YMLh1qJKTDbS' | YES=1 ./packaging/setup_database.sh" - ${IRODS_USER}
 
+    echo "if [ -e .bashrc ] ; then . .bashrc; fi" >> $IRODS_HOME/../.profile
     echo "export PATH=\$PATH:$IRODS_HOME:$IRODS_HOME/clients/icommands/bin" >> $IRODS_HOME/../.bashrc
-    chown irods:irods $IRODS_HOME/../.bashrc
+    chown ${IRODS_USER}:${IRODS_USER} $IRODS_HOME/../.profile
+    chown ${IRODS_USER}:${IRODS_USER} $IRODS_HOME/../.bashrc
 
-    su -c "touch $IRODS_HOME/.irodsprovisioned" - irods
+    su -c "touch $IRODS_HOME/.irodsprovisioned" - ${IRODS_USER}
 fi

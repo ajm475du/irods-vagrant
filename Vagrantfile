@@ -41,4 +41,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "forwarded_port", guest: 22, host: 50022
 
   config.vm.provision "shell", path: "irods.sh"
+  config.vm.provision "shell", path: "tls.sh"
 end
