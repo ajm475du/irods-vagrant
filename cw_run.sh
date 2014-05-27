@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # INVOCATION
 #
@@ -24,6 +24,8 @@
 #[ -e curators-workspace ] && rm -rf curators-workspace
 #[ -e .cache ] && rm -rf .cache
 #tar zxf /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz
+#
+#set -v
 
 # Curator's Workbench
 cd curators-workbench
@@ -77,6 +79,7 @@ WID_NOW=`xdotool getactivewindow`
     || echo Did not detect Repository URL window.
 
 # stages.json
+#xdotool key h t t p colon slash slash r a c k 5 4 period c s period d r e x e l period e d u \
 xdotool key h t t p colon slash slash l o c a l h o s t \
         slash s t a t i c slash s t a g e s period j s o n Return
 xdotool sleep 1
@@ -92,29 +95,7 @@ WNAME_NOW=`xdotool getwindowname $WID_NOW`
 [ "$WNAME_NOW" = "Curator's Workbench " ] \
     || echo Did not detect return to Workbench window a second time rather $WNAME_NOW .
 
-# Staging Areas, irods staging area, Connect
-xdotool key shift+alt+q
-xdotool sleep 1
-xdotool key q
-xdotool sleep 1
-WID_NOW=`xdotool getactivewindow`
-WNAME_NOW=`xdotool getwindowname $WID_NOW`
-[ "$WNAME_NOW" = 'Show View ' ] \
-    || echo Did not detect Show View window rather $WNAME_NOW .
-
-xdotool key s
-xdotool sleep 1
-xdotool key t
-xdotool sleep 1
-xdotool key a
-xdotool sleep 1
-xdotool key Return Tab Tab Return
-xdotool sleep 1
-WID_NOW=`xdotool getactivewindow`
-[ "`xdotool getwindowname $WID_NOW`" = "Curator's Workbench " ] \
-    || echo Did not detect return to Workbench window a third time.
-
-xdotool key Down Down Down Return
+xdotool key Tab Tab Tab Tab Tab Tab Tab Tab Down Down Down Return
 xdotool sleep 1
 WID_NOW=`xdotool getactivewindow`
 [ "`xdotool getwindowname $WID_NOW`" = 'iRODS Authentication ' ] \
