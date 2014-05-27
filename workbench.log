@@ -1,0 +1,381 @@
+2014/05/27 04:18:10,601 [Start Level Event Dispatcher] DEBUG staging.plugin  - BundleEvent INSTALLED - staging.plugin
+2014/05/27 04:18:11,655 [Refresh Packages] DEBUG staging.plugin  - BundleEvent RESOLVED - staging.plugin
+2014/05/27 04:18:13,221 [Start Level Event Dispatcher] DEBUG staging.plugin  - BundleEvent [unknown:512] - staging.plugin
+2014/05/27 04:18:19,139 [main] INFO  unc.lib.cdr.workbench.rcp.Activator  - SLF4J is logging here.
+2014/05/27 04:18:33,430 [main] DEBUG staging.plugin  - BundleEvent STARTING - staging.plugin
+2014/05/27 04:18:33,433 [main] DEBUG staging.plugin  - ServiceEvent REGISTERED - {org.osgi.service.url.URLStreamHandlerService}={url.handler.protocol=[irods], service.id=132} - staging.plugin
+2014/05/27 04:18:33,663 [main] DEBUG staging.plugin  - BundleEvent STARTED - staging.plugin
+2014/05/27 04:18:54,171 [main] INFO  org.irods.jargon.core.connection.IRODSSimpleProtocolManager  - creating simple protocol manager
+2014/05/27 04:18:54,175 [main] INFO  org.irods.jargon.core.connection.IRODSSession  - IRODS Session creation, loading default properties, these may be overridden...
+2014/05/27 04:18:54,176 [main] INFO  org.irods.jargon.core.pub.IRODSFileSystem  - IRODSfileSystem is initialized
+2014/05/27 04:18:54,181 [main] INFO  irods.efs.plugin.Activator  - 1 in sync and got initial account: null
+2014/05/27 04:18:55,866 [main] INFO  org.irods.jargon.core.connection.IRODSSimpleProtocolManager  - creating simple protocol manager
+2014/05/27 04:18:55,866 [main] INFO  org.irods.jargon.core.connection.IRODSSession  - IRODS Session creation, loading default properties, these may be overridden...
+2014/05/27 04:18:55,867 [main] INFO  org.irods.jargon.core.pub.IRODSFileSystem  - IRODSfileSystem is initialized
+2014/05/27 04:18:55,886 [main] INFO  org.irods.jargon.core.pub.IRODSAccessObjectFactoryImpl  - authenticateIRODSAccount()
+2014/05/27 04:18:55,886 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - instanceAuthMechanism()
+2014/05/27 04:18:55,889 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - authScheme:PAM
+2014/05/27 04:18:55,889 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - using PAM auth
+2014/05/27 04:18:55,894 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - pipeline configuration:PipelineConfiguration
+   irodsSocketTimeout:0
+   irodsParallelSocketTimeout:120
+   internalInputStreamBufferSize:0
+   internalOutputStreamBufferSize:-1
+   internalCacheBufferSize:65535
+  localFileOutputStreamBufferSize:16384
+  localFileInputStreamBufferSize:16384
+   defaultEncoding:utf-8
+   inputToOutputCopyBufferByteSize:65536
+  instrument:false
+   reconnect:false
+   reconnect time in millis:600000
+2014/05/27 04:18:55,894 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - using internal cache buffer of size:65535
+2014/05/27 04:18:55,894 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - opening irods socket
+2014/05/27 04:18:55,894 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connect()
+2014/05/27 04:18:55,894 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connecting socket to agent
+2014/05/27 04:18:55,894 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - normal iRODS connection
+2014/05/27 04:18:55,896 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connection to socket made...
+2014/05/27 04:18:55,897 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - default buffer on input stream
+2014/05/27 04:18:55,897 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - no buffer on output stream
+2014/05/27 04:18:55,897 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - socket opened successfully
+2014/05/27 04:18:55,911 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - reading message from irods
+2014/05/27 04:18:56,119 [main] INFO  org.irods.jargon.core.connection.AuthMechanism  - startup response:StartupResponseData:
+   status:0
+   relVersion:rods4.0.0
+   apiVersion:d
+   reconnPort:0
+   reconnAddr:
+   cookie:400
+2014/05/27 04:18:56,119 [main] INFO  org.irods.jargon.core.connection.AuthMechanism  - startSSL for PAM auth
+2014/05/27 04:18:56,120 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - calling irods function with byte array
+2014/05/27 04:18:56,121 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - reading message from irods
+2014/05/27 04:18:56,488 [main] ERROR org.irods.jargon.core.connection.AuthMechanism  - ssl exception in handshake
+javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.ssl.Alerts.getSSLException(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.fatal(Unknown Source)
+	at sun.security.ssl.Handshaker.fatalSE(Unknown Source)
+	at sun.security.ssl.Handshaker.fatalSE(Unknown Source)
+	at sun.security.ssl.ClientHandshaker.serverCertificate(Unknown Source)
+	at sun.security.ssl.ClientHandshaker.processMessage(Unknown Source)
+	at sun.security.ssl.Handshaker.processLoop(Unknown Source)
+	at sun.security.ssl.Handshaker.process_record(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readRecord(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
+	at org.irods.jargon.core.connection.PAMAuth.processAuthenticationAfterStartup(PAMAuth.java:96)
+	at org.irods.jargon.core.connection.AuthMechanism.authenticate(AuthMechanism.java:65)
+	at org.irods.jargon.core.connection.IRODSCommands.startupConnection(IRODSCommands.java:234)
+	at org.irods.jargon.core.connection.IRODSCommands.<init>(IRODSCommands.java:152)
+	at org.irods.jargon.core.connection.IRODSCommands.instance(IRODSCommands.java:288)
+	at org.irods.jargon.core.connection.IRODSSimpleProtocolManager.getIRODSProtocol(IRODSSimpleProtocolManager.java:54)
+	at org.irods.jargon.core.connection.IRODSSession.connectAndAddToProtocolsMap(IRODSSession.java:312)
+	at org.irods.jargon.core.connection.IRODSSession.currentConnection(IRODSSession.java:271)
+	at org.irods.jargon.core.pub.IRODSAccessObjectFactoryImpl.authenticateIRODSAccount(IRODSAccessObjectFactoryImpl.java:76)
+	at irods.efs.plugin.LoginInputDialog.testConnection(LoginInputDialog.java:228)
+	at irods.efs.plugin.LoginInputDialog.okPressed(LoginInputDialog.java:208)
+	at irods.efs.plugin.LoginInputDialog$2.widgetSelected(LoginInputDialog.java:191)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1276)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3562)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3186)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:825)
+	at org.eclipse.jface.window.Window.open(Window.java:801)
+	at irods.efs.plugin.Activator$2.run(Activator.java:217)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:180)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:150)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4299)
+	at irods.efs.plugin.Activator.authenticate(Activator.java:207)
+	at irods.efs.plugin.Activator.getAccount(Activator.java:188)
+	at irods.efs.plugin.IrodsFileStore.getAccount(IrodsFileStore.java:78)
+	at irods.efs.plugin.IrodsFileStore.fetchInfo(IrodsFileStore.java:154)
+	at irods.efs.plugin.IrodsFileStore.fetchInfo(IrodsFileStore.java:184)
+	at staging.plugin.EFSResolver.exists(EFSResolver.java:23)
+	at edu.unc.lib.staging.SharedStagingArea.connect(SharedStagingArea.java:206)
+	at edu.unc.lib.staging.Stages.connect(Stages.java:353)
+	at staging.plugin.views.StagingAreasView$7.run(StagingAreasView.java:316)
+	at staging.plugin.views.StagingAreasView$8.doubleClick(StagingAreasView.java:346)
+	at org.eclipse.jface.viewers.StructuredViewer$1.run(StructuredViewer.java:845)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:49)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:175)
+	at org.eclipse.jface.viewers.StructuredViewer.fireDoubleClick(StructuredViewer.java:843)
+	at org.eclipse.jface.viewers.StructuredViewer.handleDoubleSelect(StructuredViewer.java:1134)
+	at org.eclipse.jface.viewers.StructuredViewer$4.widgetDefaultSelected(StructuredViewer.java:1246)
+	at org.eclipse.jface.util.OpenStrategy.fireDefaultSelectionEvent(OpenStrategy.java:249)
+	at org.eclipse.jface.util.OpenStrategy.access$0(OpenStrategy.java:246)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:307)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1276)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3562)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3186)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2701)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2665)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2499)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:679)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:668)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at unc.lib.cdr.workbench.rcp.Application.start(Application.java:74)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1414)
+Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.validator.PKIXValidator.doBuild(Unknown Source)
+	at sun.security.validator.PKIXValidator.engineValidate(Unknown Source)
+	at sun.security.validator.Validator.validate(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.validate(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.checkTrusted(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(Unknown Source)
+	... 76 more
+Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(Unknown Source)
+	at java.security.cert.CertPathBuilder.build(Unknown Source)
+	... 82 more
+2014/05/27 04:19:24,100 [main] INFO  org.irods.jargon.core.pub.IRODSAccessObjectFactoryImpl  - authenticateIRODSAccount()
+2014/05/27 04:19:24,101 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - instanceAuthMechanism()
+2014/05/27 04:19:24,101 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - authScheme:PAM
+2014/05/27 04:19:24,101 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - using PAM auth
+2014/05/27 04:19:24,101 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - pipeline configuration:PipelineConfiguration
+   irodsSocketTimeout:0
+   irodsParallelSocketTimeout:120
+   internalInputStreamBufferSize:0
+   internalOutputStreamBufferSize:-1
+   internalCacheBufferSize:65535
+  localFileOutputStreamBufferSize:16384
+  localFileInputStreamBufferSize:16384
+   defaultEncoding:utf-8
+   inputToOutputCopyBufferByteSize:65536
+  instrument:false
+   reconnect:false
+   reconnect time in millis:600000
+2014/05/27 04:19:24,102 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - using internal cache buffer of size:65535
+2014/05/27 04:19:24,102 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - opening irods socket
+2014/05/27 04:19:24,102 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connect()
+2014/05/27 04:19:24,102 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connecting socket to agent
+2014/05/27 04:19:24,103 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - normal iRODS connection
+2014/05/27 04:19:24,111 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connection to socket made...
+2014/05/27 04:19:24,111 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - default buffer on input stream
+2014/05/27 04:19:24,111 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - no buffer on output stream
+2014/05/27 04:19:24,111 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - socket opened successfully
+2014/05/27 04:19:24,115 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - reading message from irods
+2014/05/27 04:19:24,166 [main] INFO  org.irods.jargon.core.connection.AuthMechanism  - startup response:StartupResponseData:
+   status:0
+   relVersion:rods4.0.0
+   apiVersion:d
+   reconnPort:0
+   reconnAddr:
+   cookie:400
+2014/05/27 04:19:24,167 [main] INFO  org.irods.jargon.core.connection.AuthMechanism  - startSSL for PAM auth
+2014/05/27 04:19:24,167 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - calling irods function with byte array
+2014/05/27 04:19:24,167 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - reading message from irods
+2014/05/27 04:19:24,181 [main] ERROR org.irods.jargon.core.connection.AuthMechanism  - ssl exception in handshake
+javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.ssl.Alerts.getSSLException(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.fatal(Unknown Source)
+	at sun.security.ssl.Handshaker.fatalSE(Unknown Source)
+	at sun.security.ssl.Handshaker.fatalSE(Unknown Source)
+	at sun.security.ssl.ClientHandshaker.serverCertificate(Unknown Source)
+	at sun.security.ssl.ClientHandshaker.processMessage(Unknown Source)
+	at sun.security.ssl.Handshaker.processLoop(Unknown Source)
+	at sun.security.ssl.Handshaker.process_record(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readRecord(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
+	at org.irods.jargon.core.connection.PAMAuth.processAuthenticationAfterStartup(PAMAuth.java:96)
+	at org.irods.jargon.core.connection.AuthMechanism.authenticate(AuthMechanism.java:65)
+	at org.irods.jargon.core.connection.IRODSCommands.startupConnection(IRODSCommands.java:234)
+	at org.irods.jargon.core.connection.IRODSCommands.<init>(IRODSCommands.java:152)
+	at org.irods.jargon.core.connection.IRODSCommands.instance(IRODSCommands.java:288)
+	at org.irods.jargon.core.connection.IRODSSimpleProtocolManager.getIRODSProtocol(IRODSSimpleProtocolManager.java:54)
+	at org.irods.jargon.core.connection.IRODSSession.connectAndAddToProtocolsMap(IRODSSession.java:312)
+	at org.irods.jargon.core.connection.IRODSSession.currentConnection(IRODSSession.java:271)
+	at org.irods.jargon.core.pub.IRODSAccessObjectFactoryImpl.authenticateIRODSAccount(IRODSAccessObjectFactoryImpl.java:76)
+	at irods.efs.plugin.Activator.authenticate(Activator.java:238)
+	at irods.efs.plugin.Activator.getAccount(Activator.java:188)
+	at irods.efs.plugin.IrodsFileStore.getAccount(IrodsFileStore.java:78)
+	at irods.efs.plugin.IrodsFileStore.fetchInfo(IrodsFileStore.java:154)
+	at irods.efs.plugin.IrodsFileStore.fetchInfo(IrodsFileStore.java:184)
+	at staging.plugin.EFSResolver.exists(EFSResolver.java:23)
+	at edu.unc.lib.staging.SharedStagingArea.connect(SharedStagingArea.java:206)
+	at edu.unc.lib.staging.Stages.connect(Stages.java:353)
+	at staging.plugin.views.StagingAreasView$7.run(StagingAreasView.java:316)
+	at staging.plugin.views.StagingAreasView$8.doubleClick(StagingAreasView.java:346)
+	at org.eclipse.jface.viewers.StructuredViewer$1.run(StructuredViewer.java:845)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:49)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:175)
+	at org.eclipse.jface.viewers.StructuredViewer.fireDoubleClick(StructuredViewer.java:843)
+	at org.eclipse.jface.viewers.StructuredViewer.handleDoubleSelect(StructuredViewer.java:1134)
+	at org.eclipse.jface.viewers.StructuredViewer$4.widgetDefaultSelected(StructuredViewer.java:1246)
+	at org.eclipse.jface.util.OpenStrategy.fireDefaultSelectionEvent(OpenStrategy.java:249)
+	at org.eclipse.jface.util.OpenStrategy.access$0(OpenStrategy.java:246)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:307)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1276)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3562)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3186)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2701)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2665)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2499)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:679)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:668)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at unc.lib.cdr.workbench.rcp.Application.start(Application.java:74)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1414)
+Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.validator.PKIXValidator.doBuild(Unknown Source)
+	at sun.security.validator.PKIXValidator.engineValidate(Unknown Source)
+	at sun.security.validator.Validator.validate(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.validate(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.checkTrusted(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(Unknown Source)
+	... 62 more
+Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(Unknown Source)
+	at java.security.cert.CertPathBuilder.build(Unknown Source)
+	... 68 more
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - instanceAuthMechanism()
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - authScheme:PAM
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.AuthenticationFactoryImpl  - using PAM auth
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - pipeline configuration:PipelineConfiguration
+   irodsSocketTimeout:0
+   irodsParallelSocketTimeout:120
+   internalInputStreamBufferSize:0
+   internalOutputStreamBufferSize:-1
+   internalCacheBufferSize:65535
+  localFileOutputStreamBufferSize:16384
+  localFileInputStreamBufferSize:16384
+   defaultEncoding:utf-8
+   inputToOutputCopyBufferByteSize:65536
+  instrument:false
+   reconnect:false
+   reconnect time in millis:600000
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - using internal cache buffer of size:65535
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - opening irods socket
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connect()
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connecting socket to agent
+2014/05/27 04:19:24,185 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - normal iRODS connection
+2014/05/27 04:19:24,187 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - connection to socket made...
+2014/05/27 04:19:24,187 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - default buffer on input stream
+2014/05/27 04:19:24,187 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - no buffer on output stream
+2014/05/27 04:19:24,187 [main] INFO  org.irods.jargon.core.connection.IRODSConnection  - socket opened successfully
+2014/05/27 04:19:24,194 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - reading message from irods
+2014/05/27 04:19:24,231 [main] INFO  org.irods.jargon.core.connection.AuthMechanism  - startup response:StartupResponseData:
+   status:0
+   relVersion:rods4.0.0
+   apiVersion:d
+   reconnPort:0
+   reconnAddr:
+   cookie:400
+2014/05/27 04:19:24,231 [main] INFO  org.irods.jargon.core.connection.AuthMechanism  - startSSL for PAM auth
+2014/05/27 04:19:24,231 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - calling irods function with byte array
+2014/05/27 04:19:24,231 [main] INFO  org.irods.jargon.core.connection.IRODSCommands  - reading message from irods
+2014/05/27 04:19:24,238 [main] ERROR org.irods.jargon.core.connection.AuthMechanism  - ssl exception in handshake
+javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.ssl.Alerts.getSSLException(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.fatal(Unknown Source)
+	at sun.security.ssl.Handshaker.fatalSE(Unknown Source)
+	at sun.security.ssl.Handshaker.fatalSE(Unknown Source)
+	at sun.security.ssl.ClientHandshaker.serverCertificate(Unknown Source)
+	at sun.security.ssl.ClientHandshaker.processMessage(Unknown Source)
+	at sun.security.ssl.Handshaker.processLoop(Unknown Source)
+	at sun.security.ssl.Handshaker.process_record(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readRecord(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
+	at org.irods.jargon.core.connection.PAMAuth.processAuthenticationAfterStartup(PAMAuth.java:96)
+	at org.irods.jargon.core.connection.AuthMechanism.authenticate(AuthMechanism.java:65)
+	at org.irods.jargon.core.connection.IRODSCommands.startupConnection(IRODSCommands.java:234)
+	at org.irods.jargon.core.connection.IRODSCommands.<init>(IRODSCommands.java:152)
+	at org.irods.jargon.core.connection.IRODSCommands.instance(IRODSCommands.java:288)
+	at org.irods.jargon.core.connection.IRODSSimpleProtocolManager.getIRODSProtocol(IRODSSimpleProtocolManager.java:54)
+	at org.irods.jargon.core.connection.IRODSSession.connectAndAddToProtocolsMap(IRODSSession.java:312)
+	at org.irods.jargon.core.connection.IRODSSession.currentConnection(IRODSSession.java:271)
+	at org.irods.jargon.core.pub.IRODSGenericAO.<init>(IRODSGenericAO.java:61)
+	at org.irods.jargon.core.pub.io.IRODSFileFactoryImpl.<init>(IRODSFileFactoryImpl.java:39)
+	at org.irods.jargon.core.pub.IRODSFileSystem.getIRODSFileFactory(IRODSFileSystem.java:142)
+	at irods.efs.plugin.IrodsFileStore.fetchInfo(IrodsFileStore.java:154)
+	at irods.efs.plugin.IrodsFileStore.fetchInfo(IrodsFileStore.java:184)
+	at staging.plugin.EFSResolver.exists(EFSResolver.java:23)
+	at edu.unc.lib.staging.SharedStagingArea.connect(SharedStagingArea.java:206)
+	at edu.unc.lib.staging.Stages.connect(Stages.java:353)
+	at staging.plugin.views.StagingAreasView$7.run(StagingAreasView.java:316)
+	at staging.plugin.views.StagingAreasView$8.doubleClick(StagingAreasView.java:346)
+	at org.eclipse.jface.viewers.StructuredViewer$1.run(StructuredViewer.java:845)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:49)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:175)
+	at org.eclipse.jface.viewers.StructuredViewer.fireDoubleClick(StructuredViewer.java:843)
+	at org.eclipse.jface.viewers.StructuredViewer.handleDoubleSelect(StructuredViewer.java:1134)
+	at org.eclipse.jface.viewers.StructuredViewer$4.widgetDefaultSelected(StructuredViewer.java:1246)
+	at org.eclipse.jface.util.OpenStrategy.fireDefaultSelectionEvent(OpenStrategy.java:249)
+	at org.eclipse.jface.util.OpenStrategy.access$0(OpenStrategy.java:246)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:307)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1276)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3562)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3186)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2701)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2665)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2499)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:679)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:668)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at unc.lib.cdr.workbench.rcp.Application.start(Application.java:74)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1414)
+Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.validator.PKIXValidator.doBuild(Unknown Source)
+	at sun.security.validator.PKIXValidator.engineValidate(Unknown Source)
+	at sun.security.validator.Validator.validate(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.validate(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.checkTrusted(Unknown Source)
+	at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(Unknown Source)
+	... 61 more
+Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(Unknown Source)
+	at java.security.cert.CertPathBuilder.build(Unknown Source)
+	... 67 more
+2014/05/27 04:19:26,419 [main] DEBUG unc.lib.cdr.workbench.rcp.METSWorkspaceSaveParticipant  - METS save participant called, save(context)
+2014/05/27 04:19:26,693 [main] DEBUG staging.plugin  - BundleEvent STOPPING - staging.plugin
+2014/05/27 04:19:26,693 [main] DEBUG staging.plugin  - ServiceEvent UNREGISTERING - {org.osgi.service.url.URLStreamHandlerService}={url.handler.protocol=[irods], service.id=132} - staging.plugin
+2014/05/27 04:19:26,694 [main] DEBUG staging.plugin  - BundleEvent STOPPED - staging.plugin

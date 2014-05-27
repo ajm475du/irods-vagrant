@@ -1,14 +1,33 @@
 #!/bin/sh
 
-# Run this as user irods in directory /var/lib/irods
-# Get an X display by using xvfb or by running remotely via
-#   ssh -X -p 50080 vagrant@localhost
+# INVOCATION
 #
-# A handy reference for using "xdotool key":
-# symbolic names for keys: /usr/include/X11/keysymdef.h
+# Run this as user vagrant in vagrant's directory: /home/vagrant
+# Get an X display by using xvfb or by running remotely via
+#   ssh -X -p 50022 vagrant@localhost 'sh /vagrant/cw_run.sh'
+#
+# NOTES
+#
+# * A handy reference for using "xdotool key":
+#   symbolic names for keys: /usr/include/X11/keysymdef.h
+#   (in Ubuntu package x11proto-core-dev)
+# * The only reason this uses "xdotool sleep" rather than
+#   "sleep" is a tiny aethetic reason. It fits in with all
+#   the other xdotool invocations. Please do not
+#   micro-optimize it, OK?
+
+
+## Erase a previous test if any,
+## to keep the "test the test" cycle relatively short.
+#pkill -f Workbench
+#[ -e curators-workbench ] && rm -rf curators-workbench
+#[ -e curators-workspace ] && rm -rf curators-workspace
+#[ -e .cache ] && rm -rf .cache
+#tar zxf /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz
 
 # Curator's Workbench
-/var/lib/irods/curators-workbench/Workbench &
+cd curators-workbench
+./Workbench &
 WID=`xdotool search --onlyvisible --name "Curator's"`
 while [ "$WID" = "" ]
 do
@@ -25,51 +44,81 @@ fi
 
 # Preferences
 xdotool windowactivate $WID
-xdotool key --window $WID Alt_L+h Down Down Down Down Down Down Return
+xdotool key --window $WID Alt_L+h
 xdotool sleep 1
-WID_PREFS=`xdotool getactivewindow`
+xdotool key Down Down Down Down Down Down Return
+xdotool sleep 1
+WID_NOW=`xdotool getactivewindow`
+[ "`xdotool getwindowname $WID_NOW`" = 'Preferences ' ] \
+    || echo Did not detect Preferences window.
 
-# Repository, Add
-xdotool key r
-xdotool sleep 1
-xdotool key e
-xdotool sleep 1
-xdotool key p
+# Workaround: first time, tabbing gets stuck in prefs' left panel
+xdotool key Tab Down Down Down Down Down Down
 xdotool sleep 3
-xdotool key Return
-xdotool sleep 3
-# Somehow tabbing around wasn't working here,
-# so I switched to mousing around.
-xdotool mousemove --window $WID_PREFS 223 411
-xdotool click 1
+xdotool key alt+F4
 xdotool sleep 1
-WID_X=`xdotool getactivewindow` # > /dev/null
-xdotool getwindowname $WID_X
+WID_NOW=`xdotool getactivewindow`
+WNAME_NOW=`xdotool getwindowname $WID_NOW`
+[ "$WNAME_NOW" = "Curator's Workbench " ] \
+    || echo Did not detect return to Workbench window rather $WNAME_NOW .
+
+xdotool key --window $WID Alt_L+h
+xdotool sleep 1
+xdotool key Down Down Down Down Down Down Return
+xdotool sleep 1
+WID_NOW=`xdotool getactivewindow`
+[ "`xdotool getwindowname $WID_NOW`" = 'Preferences ' ] \
+    || echo Did not detect Preferences window the second time.
+
+xdotool key Tab Tab Tab Tab Return
+xdotool sleep 1
+WID_NOW=`xdotool getactivewindow`
+[ "`xdotool getwindowname $WID_NOW`" = 'Repository URL ' ] \
+    || echo Did not detect Repository URL window.
 
 # stages.json
 xdotool key h t t p colon slash slash l o c a l h o s t \
         slash s t a t i c slash s t a g e s period j s o n Return
-xdotool getactivewindow > /dev/null
-
-# Staging Areas, irods, Connect
-xdotool key Tab Tab Tab Tab Tab Return
-xdotool getactivewindow > /dev/null
 xdotool sleep 1
+WID_NOW=`xdotool getactivewindow`
+WNAME_NOW=`xdotool getwindowname $WID_NOW`
+[ "$WNAME_NOW" = 'Preferences ' ] \
+    || echo Did not detect return to Preferences window rather $WNAME_NOW .
+
+xdotool key Tab Tab Tab Tab Tab Return
+xdotool sleep 1
+WID_NOW=`xdotool getactivewindow`
+WNAME_NOW=`xdotool getwindowname $WID_NOW`
+[ "$WNAME_NOW" = "Curator's Workbench " ] \
+    || echo Did not detect return to Workbench window a second time rather $WNAME_NOW .
+
+# Staging Areas, irods staging area, Connect
 xdotool key shift+alt+q
 xdotool sleep 1
 xdotool key q
-xdotool getactivewindow > /dev/null
 xdotool sleep 1
+WID_NOW=`xdotool getactivewindow`
+WNAME_NOW=`xdotool getwindowname $WID_NOW`
+[ "$WNAME_NOW" = 'Show View ' ] \
+    || echo Did not detect Show View window rather $WNAME_NOW .
+
 xdotool key s
 xdotool sleep 1
 xdotool key t
 xdotool sleep 1
 xdotool key a
 xdotool sleep 1
-xdotool key Return
+xdotool key Return Tab Tab Return
 xdotool sleep 1
-xdotool key Down Return Down Down Down Down Return
-xdotool getactivewindow > /dev/null
+WID_NOW=`xdotool getactivewindow`
+[ "`xdotool getwindowname $WID_NOW`" = "Curator's Workbench " ] \
+    || echo Did not detect return to Workbench window a third time.
+
+xdotool key Down Down Down Return
+xdotool sleep 1
+WID_NOW=`xdotool getactivewindow`
+[ "`xdotool getwindowname $WID_NOW`" = 'iRODS Authentication ' ] \
+    || echo Did not detect iRODS Authentication window.
 
 # Enter password and submit
 xdotool key 4 M P A c w J e Q 2 S g Tab Tab Return

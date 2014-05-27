@@ -42,4 +42,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "shell", path: "irods.sh"
   config.vm.provision "shell", path: "tls.sh"
+  config.vm.provision "shell", path: "cw_in.sh"
 end
