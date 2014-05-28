@@ -2,10 +2,18 @@
 
 IRODS_HOME=/var/lib/irods/iRODS
 IRODS_USER=irods
+IRODS_USER_HOME=/var/lib/irods
+IRODS_CLIENT_USER=vagrant
+IRODS_CLIENT_HOME=/home/vagrant
 
 NEWUSER_PASSWORD=4MPAcwJeQ2Sg
 
 set -v
+
+cat $IRODS_USER_HOME/.bashrc >> $IRODS_CLIENT_HOME/.bashrc
+mkdir -p $IRODS_CLIENT_HOME/.ssh
+chown -R $IRODS_CLIENT_USER:$IRODS_CLIENT_USER $IRODS_CLIENT_HOME/.ssh
+chmod 700 $IRODS_CLIENT_HOME/.ssh
 
 su -c 'iadmin mkuser newuser rodsuser' - $IRODS_USER
 useradd -M newuser -s /bin/false # no home dir, no shell
@@ -44,9 +52,11 @@ sed -i -e '12aexport irodsSSLCertificateChainFile' $IRODS_HOME/irodsctl
 sed -i -e '12airodsSSLCertificateChainFile=$IRODS_HOME/server/config/chain.pem' $IRODS_HOME/irodsctl
 su -c './iRODS/irodsctl restart' - ${IRODS_USER}
 
-sed -i -e "s/rods'/newuser'/" $IRODS_HOME/../.irods/.irodsEnv
+cp -r $IRODS_USER_HOME/.irods $IRODS_CLIENT_HOME
+chown -R $IRODS_CLIENT_USER:$IRODS_CLIENT_USER $IRODS_CLIENT_HOME/.irods
+sed -i -e "s/rods'/newuser'/" $IRODS_CLIENT_HOME/.irods/.irodsEnv
 
-cat <<EOT > $IRODS_HOME/../iinit.sh
+cat <<EOT > $IRODS_CLIENT_HOME/iinit.sh
 #!/bin/sh
 irodsSSLCACertificateFile=$IRODS_HOME/server/config/chain.pem
 irodsSSLVerifyServer=cert # leniency
@@ -55,7 +65,7 @@ export irodsSSLCACertificateFile irodsSSLVerifyServer irodsAuthScheme
 echo "${NEWUSER_PASSWORD}" | iinit
 EOT
 
-chown ${IRODS_USER}:${IRODS_USER} $IRODS_HOME/../iinit.sh
-chmod u+x $IRODS_HOME/../iinit.sh
+chown ${IRODS_CLIENT_USER}:${IRODS_CLIENT_USER} $IRODS_CLIENT_HOME/iinit.sh
+chmod u+x $IRODS_CLIENT_HOME/iinit.sh
 
-su -c "$IRODS_HOME/../iinit.sh" - ${IRODS_USER}
+su -c "$IRODS_CLIENT_HOME/iinit.sh" - ${IRODS_CLIENT_USER}

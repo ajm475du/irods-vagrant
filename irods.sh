@@ -6,6 +6,7 @@ PLUGIN_DEB=irods-database-plugin-postgres-1.0.deb
 PLUGIN_URL=ftp://ftp.renci.org/pub/irods/releases/4.0.0/$PLUGIN_DEB
 IRODS_HOME=/var/lib/irods/iRODS
 IRODS_USER=irods
+IRODS_USER_HOME=/var/lib/irods
 
 set -v
 
@@ -42,10 +43,10 @@ EOT
 
     su -c "echo 'YMLh1qJKTDbS' | YES=1 ./packaging/setup_database.sh" - ${IRODS_USER}
 
-    echo "if [ -e .bashrc ] ; then . .bashrc; fi" >> $IRODS_HOME/../.profile
-    echo "export PATH=\$PATH:$IRODS_HOME:$IRODS_HOME/clients/icommands/bin" >> $IRODS_HOME/../.bashrc
-    chown ${IRODS_USER}:${IRODS_USER} $IRODS_HOME/../.profile
-    chown ${IRODS_USER}:${IRODS_USER} $IRODS_HOME/../.bashrc
+    echo "if [ -e .bashrc ] ; then . .bashrc; fi" >> $IRODS_USER_HOME/.profile
+    echo "export PATH=\$PATH:$IRODS_HOME:$IRODS_HOME/clients/icommands/bin" >> $IRODS_USER_HOME/.bashrc
+    chown ${IRODS_USER}:${IRODS_USER} $IRODS_USER_HOME/.profile
+    chown ${IRODS_USER}:${IRODS_USER} $IRODS_USER_HOME/.bashrc
 
     su -c "touch $IRODS_HOME/.irodsprovisioned" - ${IRODS_USER}
 fi
