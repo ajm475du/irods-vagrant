@@ -24,6 +24,30 @@ This gives users a reproducible iRODS environment to do work against.
 * Run 'irodsctl start' to start up iRODS and use the `i-commands`.
 
 
+# Usage outside of Vagrant
+
+To apply the scripts directly to an Ubuntu system, without Vagrant, you could do this:
+
+    git clone $IRODS_VAGRANT_URL
+    sudo adduser vagrant
+    sudo passwd -l vagrant
+    sudo mkdir -p /vagrant
+    sudo cp irods-vagrant/* /vagrant # Don't need files [RVw]* though
+    sudo --login sh -c 'cd /vagrant && . ./irods.sh'
+
+    sudo --login sh -c 'cd /vagrant && . ./tls.sh'
+
+    sudo --login sh -c 'cd /vagrant && . ./cw_in.sh'
+
+    sh /vagrant/cw_run.sh
+
+This last command assumes that you have graphics on the system.
+If not, you could put your ssh public key in user vagrant's
+`~/.ssh/authorized_keys` and do this:
+
+    ssh -X vagrant@$IRODS_HOST 'sh /vagrant/cw_run.sh'
+
+
 # Notes
 
 * Your local port 1247 will be forwarded to port 1247 in the VM.
