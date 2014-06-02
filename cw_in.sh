@@ -1,23 +1,24 @@
 #!/bin/sh
 
 IRODS_HOME=/var/lib/irods/iRODS
-JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
 IRODS_CLIENT_USER=vagrant
 IRODS_CLIENT_HOME=/home/vagrant
+JAVA_HOME=$IRODS_CLIENT_HOME/curators-workbench
 
 set -v
 
 apt-get -q -y install openjdk-7-jre apache2 xdotool
-keytool -noprompt -importcert -keystore $JAVA_HOME/jre/lib/security/cacerts -file $IRODS_HOME/server/config/chain.pem -trustcacerts -alias 'debian:rack54.cs.pem' -storepass changeit
 
 if [ ! -e /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz ]
 then
     chown ${IRODS_CLIENT_USER}:${IRODS_CLIENT_USER} ${IRODS_CLIENT_HOME}/curators-workbench-linux.gtk.x86_64-jre.tar.gz
     cd /vagrant
-    wget http://www2.lib.unc.edu/software/workbench/4.1.5/products/curators-workbench-linux.gtk.x86_64-jre.tar.gz
+    wget -q http://www2.lib.unc.edu/software/workbench/4.1.5/products/curators-workbench-linux.gtk.x86_64-jre.tar.gz
     cd -
 fi
-su -c 'tar zxvf /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz' - ${IRODS_CLIENT_USER}
+su -c 'tar zxf /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz' - ${IRODS_CLIENT_USER}
+
+keytool -noprompt -importcert -keystore $JAVA_HOME/jre/lib/security/cacerts -file $IRODS_HOME/server/config/chain.pem -trustcacerts -alias 'debian:rack54.cs.pem' -storepass changeit
 
 mkdir -p /var/www/html/static
 cat <<END_Y > /var/www/html/static/stages.json
