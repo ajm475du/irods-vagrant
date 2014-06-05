@@ -69,3 +69,4 @@ chown ${IRODS_CLIENT_USER}:${IRODS_CLIENT_USER} $IRODS_CLIENT_HOME/iinit.sh
 chmod u+x $IRODS_CLIENT_HOME/iinit.sh
 
 su -c "$IRODS_CLIENT_HOME/iinit.sh" - ${IRODS_CLIENT_USER}
+su -c 'imkdir staging' - ${IRODS_CLIENT_USER}
