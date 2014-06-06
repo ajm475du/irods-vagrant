@@ -11,7 +11,6 @@ apt-get -q -y install openjdk-7-jre apache2 xdotool
 
 if [ ! -e /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz ]
 then
-    chown ${IRODS_CLIENT_USER}:${IRODS_CLIENT_USER} ${IRODS_CLIENT_HOME}/curators-workbench-linux.gtk.x86_64-jre.tar.gz
     cd /vagrant
     wget -q http://www2.lib.unc.edu/software/workbench/4.1.5/products/curators-workbench-linux.gtk.x86_64-jre.tar.gz
     cd -
