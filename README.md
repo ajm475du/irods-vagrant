@@ -24,6 +24,12 @@ This gives users a reproducible iRODS environment to do work against.
 * Run 'irodsctl start' to start up iRODS and use the `i-commands`.
 
 
+# GUI testing
+
+    ssh-keygen -f ~/.ssh/known_hosts -R [localhost]:50022 && \
+    ssh -X -p 50022 vagrant@localhost 'sh /vagrant/cw_run.sh'
+
+
 # Usage outside of Vagrant
 
 To apply the scripts directly to an Ubuntu system, without Vagrant, you could do this:
