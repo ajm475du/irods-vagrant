@@ -1,9 +1,9 @@
 #!/bin/bash -x
 
-IRODS_DEB=irods-icat-4.0.0-64bit.deb
-IRODS_URL=ftp://ftp.renci.org/pub/irods/releases/4.0.0/$IRODS_DEB
-PLUGIN_DEB=irods-database-plugin-postgres-1.0.deb
-PLUGIN_URL=ftp://ftp.renci.org/pub/irods/releases/4.0.0/$PLUGIN_DEB
+IRODS_DEB=irods-icat-4.0.1-64bit.deb
+IRODS_URL=ftp://ftp.renci.org/pub/irods/releases/4.0.1/$IRODS_DEB
+PLUGIN_DEB=irods-database-plugin-postgres-1.1.deb
+PLUGIN_URL=ftp://ftp.renci.org/pub/irods/releases/4.0.1/$PLUGIN_DEB
 IRODS_HOME=/var/lib/irods/iRODS
 IRODS_USER=irods
 IRODS_USER_HOME=/var/lib/irods
