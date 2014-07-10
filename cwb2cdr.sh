@@ -1,42 +1,109 @@
 #!/bin/bash
 
-BRIDGE_INTERFACE=eth0
 
-BREAK_STUFF=false # DON'T set to 'true' (quotes optional) except to break stuff
+
+ERASE_EXISTING=false # DESTRUCTIVE when set to "true"! (quotes are optional)
+TRUST_EXISTING=true
+
+
+
+BASEURL=http://www2.lib.unc.edu/software
 
 CDR=cdr-20131111083629
-CWB=curators-workbench-linux.gtk.x86_64-jre.tar.gz
+CDR_FILE=$CDR.ova
+CDR_BASEURL=$BASEURL/cdr
 
-if [ ! -e $CDR.ova ]
+CWB_FILE=curators-workbench-linux.gtk.x86_64-jre.tar.gz
+CWB_VN=4.1.5
+CWB_BASEURL=$BASEURL/workbench/$CWB_VN/products
+
+unset BASEURL CWB_VN
+
+
+
+HOSTONLYIF=vboxnet0
+HOSTONLY_SUBNET=192.168.56
+DHCPSERVER=HostInterfaceNetworking-$HOSTONLYIF
+
+
+
+if [ ! -e $CDR_FILE ]
 then
-    wget http://www2.lib.unc.edu/software/cdr/$CDR.ova
+    wget $CDR_BASEURL/$CDR_FILE
 fi
 
-if [ ! -e $CWB ]
+if [ ! -e $CWB_FILE ]
 then
-    wget http://www2.lib.unc.edu/software/workbench/4.1.5/products/$CWB
+    wget $CWB_BASEURL/$CWB_FILE
 fi
 
-if [ "$BREAK_STUFF" = true ]
+unset CDR_BASEURL CWB_BASEURL
+
+
+
+if [ "$ERASE_EXISTING" = true ]
 then
     if [ -n "`VBoxManage list vms | grep $CDR`" ]
     then
         VBoxManage controlvm $CDR poweroff
         VBoxManage unregistervm $CDR --delete
     fi
+    
+    if [ -n "`VBoxManage list dhcpservers | grep $DHCPSERVER`" ]
+    then
+        VBoxManage dhcpserver remove --ifname $HOSTONLYIF
+    fi
+    
+    if [ -n "`VBoxManage list hostonlyifs | grep $HOSTONLYIF`" ]
+    then
+        VBoxManage hostonlyif remove $HOSTONLYIF
+    fi
 fi
 
-if [ -n "`VBoxManage list vms | grep $CDR`" ]
+
+
+VM=`VBoxManage list vms | grep $CDR`
+IF=`VBoxManage list hostonlyifs | grep $HOSTONLYIF`
+DHCP=`VBoxManage list dhcpservers | grep $DHCPSERVER`
+if [ -z "$VM" -o -z "$IF" -o -z "$DHCP" ]
 then
+    if [ -z "$VM" ]
+    then
+        VBoxManage import $CDR_FILE --vsys 0 --memory 2048
+        GULLIBLE=false
+    else
+        GULLIBLE=true
+    fi
+    
+    if [ -z "$IF" ]
+    then
+        VBoxManage hostonlyif create
+        VBoxManage hostonlyif ipconfig $HOSTONLYIF --ip $HOSTONLY_SUBNET.1
+    fi
+    
+    if [ -z "$DHCP" ]
+    then
+        VBoxManage dhcpserver add --ifname $HOSTONLYIF \
+                --ip $HOSTONLY_SUBNET.100 \
+                --netmask 255.255.255.0 \
+                --lowerip $HOSTONLY_SUBNET.101 \
+                --upperip $HOSTONLY_SUBNET.255 \
+                --enable
+    fi
+elif [ "$TRUST_EXISTING" = true ]
+then
+    GULLIBLE=true
+else
     echo "vm $CDR already exists!"
     exit 1
 fi
-  
-VBoxManage import $CDR.ova \
-  --vsys 0 --memory 2048
-VBoxManage modifyvm $CDR --nic1 bridged \
-  --bridgeadapter1 $BRIDGE_INTERFACE
+unset VM IF DHCP TRUST_EXISTING
+
+VBoxManage modifyvm $CDR --nic1 hostonly --hostonlyadapter1 $HOSTONLYIF \
+        --nic2 nat
 VBoxManage startvm $CDR
+
+echo Waiting for VM "\"$CDR\"" to report its IP number...
 STATUS=1
 until [ "$STATUS" -eq 0 -a "$IP" != "No value set!" ]
 do 
@@ -44,11 +111,24 @@ do
     IP=$(VBoxManage guestproperty get $CDR /VirtualBox/GuestInfo/Net/0/V4/IP)
     STATUS=$?
 done
-
+unset STATUS
 IP=`echo $IP | cut -d ' ' -f 2`
 
-scp $CWB vagrant@$IP:
-ssh vagrant@$IP "tar zxf $CWB"
-ssh vagrant@$IP 'sudo yum -y install xorg-x11-xauth'
-ssh -X vagrant@$IP 'curators-workbench/Workbench &'
+echo VM "\"$CDR\"" has IP number $IP.
+
+if [ "$GULLIBLE" != true ]
+then
+    VBoxManage guestcontrol $CDR copyto `pwd`/$CWB_FILE /home/vagrant/$CWB_FILE \
+            --username vagrant --password vagrant
+    VBoxManage guestcontrol $CDR exec --image /bin/tar \
+            --username vagrant --password vagrant --wait-stderr \
+            -- -C /home/vagrant -zxf /home/vagrant/$CWB_FILE
+    VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
+            --username vagrant --password vagrant --wait-stdout \
+            -- yum -y install xorg-x11-xauth
+fi
+
+echo
+echo The password is not a secret. Please type: vagrant
+ssh -X vagrant@$IP 'nohup curators-workbench/Workbench 2>&1 >/dev/null &'
 
