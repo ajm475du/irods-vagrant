@@ -2,7 +2,7 @@
 
 
 
-ERASE_EXISTING=false # DESTRUCTIVE when set to "true"! (quotes are optional)
+ERASE_EXISTING=true # DESTRUCTIVE when set to "true"! (quotes are optional)
 TRUST_EXISTING=true
 
 
@@ -16,6 +16,8 @@ CDR_BASEURL=$BASEURL/cdr
 CWB_FILE=curators-workbench-linux.gtk.x86_64-jre.tar.gz
 CWB_VN=4.1.5
 CWB_BASEURL=$BASEURL/workbench/$CWB_VN/products
+
+XDO_FILE=xdotool-2.20110530.1-1.x86_64.rpm
 
 unset BASEURL CWB_VN
 
@@ -118,17 +120,46 @@ echo VM "\"$CDR\"" has IP number $IP.
 
 if [ "$GULLIBLE" != true ]
 then
+    # Enable X11 tunneling via ssh -X
+    VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
+            --username vagrant --password vagrant --wait-stdout \
+            -- yum -y install xorg-x11-xauth
+
+    # Set up Curator's Workbench
     VBoxManage guestcontrol $CDR copyto `pwd`/$CWB_FILE /home/vagrant/$CWB_FILE \
             --username vagrant --password vagrant
     VBoxManage guestcontrol $CDR exec --image /bin/tar \
             --username vagrant --password vagrant --wait-stderr \
             -- -C /home/vagrant -zxf /home/vagrant/$CWB_FILE
+
+    # Set up automated test of Curator's Workbench GUI
+    VBoxManage guestcontrol $CDR createdir /home/vagrant/vagrant \
+            --username vagrant --password vagrant
+    VBoxManage guestcontrol $CDR copyto `pwd`/$XDO_FILE /home/vagrant/vagrant/$XDO_FILE \
+            --username vagrant --password vagrant
+    VBoxManage guestcontrol $CDR copyto `pwd`/tls.sh /home/vagrant/vagrant/tls.sh \
+            --username vagrant --password vagrant
+    VBoxManage guestcontrol $CDR copyto `pwd`/cw_in.sh /home/vagrant/vagrant/cw_in.sh \
+            --username vagrant --password vagrant
     VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
             --username vagrant --password vagrant --wait-stdout \
-            -- yum -y install xorg-x11-xauth
+            -- mv /home/vagrant/vagrant/tls.sh /vagrant/tls.sh
+    VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
+            --username vagrant --password vagrant --wait-stdout \
+            -- mv /home/vagrant/vagrant/cw_in.sh /vagrant/cw_in.sh
+    VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
+            --username vagrant --password vagrant --wait-stdout \
+            -- chmod u+x /vagrant/tls.sh
+    VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
+            --username vagrant --password vagrant --wait-stdout \
+            -- chmod u+x /vagrant/cw_in.sh
+    VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
+            --username vagrant --password vagrant --wait-stdout \
+            -- mv /home/vagrant/vagrant/$XDO_FILE /vagrant/$XDO_FILE
 fi
 
 echo
 echo The password is not a secret. Please type: vagrant
-ssh -X vagrant@$IP 'nohup curators-workbench/Workbench 2>&1 >/dev/null &'
-
+ssh -X vagrant@$IP 'sudo su - root -c "cd /vagrant && IRODS_USER=vagrant IRODS_USER_HOME=/home/vagrant IRODS_HOME=/opt/iRODS ./tls.sh"'
+echo Please type the password: vagrant
+ssh -X vagrant@$IP 'sudo su - root -c "cd /vagrant && IRODS_HOME=/opt/iRODS ./cw_in.sh"'

@@ -1,12 +1,15 @@
 #!/bin/bash -x
 
-IRODS_HOME=/var/lib/irods/iRODS
-IRODS_USER=irods
-IRODS_USER_HOME=/var/lib/irods
+IRODS_HOME=${IRODS_HOME:-/var/lib/irods/iRODS}
+IRODS_USER=${IRODS_USER:-irods}
+IRODS_USER_HOME=${IRODS_USER_HOME:-/var/lib/irods}
 IRODS_CLIENT_USER=vagrant
 IRODS_CLIENT_HOME=/home/vagrant
 
 NEWUSER_PASSWORD=4MPAcwJeQ2Sg
+
+IRODS_VERSION=`$IRODS_HOME/clients/icommands/bin/ienv | grep '^NOTICE: Release' | cut -d= -f2`
+IRODS_VERSION=${IRODS_VERSION:5:3}
 
 set -v
 
@@ -50,7 +53,27 @@ sed -i -e '12aexport irodsSSLCertificateKeyFile' $IRODS_HOME/irodsctl
 sed -i -e '12airodsSSLCertificateKeyFile=$IRODS_HOME/server/config/server.key' $IRODS_HOME/irodsctl
 sed -i -e '12aexport irodsSSLCertificateChainFile' $IRODS_HOME/irodsctl
 sed -i -e '12airodsSSLCertificateChainFile=$IRODS_HOME/server/config/chain.pem' $IRODS_HOME/irodsctl
-su -c './iRODS/irodsctl restart' - ${IRODS_USER}
+
+if [ "$IRODS_VERSION" = "3.2" ]
+then
+    sed -i -e '440s/^# PAM_AUTH/PAM_AUTH/' $IRODS_HOME/config/config.mk
+    sed -i -e '450s/^# USE_SSL/USE_SSL/' $IRODS_HOME/config/config.mk
+    sed -i -e 's/sk_GENERAL_NAMES/sk_GENERAL_NAME/' $IRODS_HOME/lib/core/src/sslSockComm.c
+
+    yum -q -y install openssl-devel pam-devel
+
+    chown root $IRODS_HOME/server/bin/PamAuthCheck
+    chmod u+s $IRODS_HOME/server/bin/PamAuthCheck
+fi
+
+if [ "$IRODS_VERSION" = "3.2" ]
+then
+    cd $IRODS_HOME
+    make
+    cd -
+fi
+
+su -c "${IRODS_HOME}/irodsctl restart" - ${IRODS_USER}
 
 cp -r $IRODS_USER_HOME/.irods $IRODS_CLIENT_HOME
 chown -R $IRODS_CLIENT_USER:$IRODS_CLIENT_USER $IRODS_CLIENT_HOME/.irods

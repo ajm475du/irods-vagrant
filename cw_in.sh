@@ -1,13 +1,32 @@
 #!/bin/sh
 
-IRODS_HOME=/var/lib/irods/iRODS
+IRODS_HOME=${IRODS_HOME:-/var/lib/irods/iRODS}
 IRODS_CLIENT_USER=vagrant
 IRODS_CLIENT_HOME=/home/vagrant
 JAVA_HOME=$IRODS_CLIENT_HOME/curators-workbench
 
 set -v
 
-apt-get -q -y install openjdk-7-jre apache2 xdotool
+DISTRIBUTOR=`lsb_release -is`
+if [ "$DISTRIBUTOR" = "Ubuntu" ]
+then
+    # Includes apache2 in order to host stages.json
+    apt-get -q -y install openjdk-7-jre apache2 xdotool
+elif [ "$DISTRIBUTOR" = "CentOS" ]
+then
+    # Let's take this as an indication that we're
+    # running in the virtual machine
+    # http://www2.lib.unc.edu/software/cdr/cdr-20131111083629.ova
+    # first made available November 11, 2013, and
+    # last retrieved at this writing, July 14, 2014.
+    # It has java: java-1.6.0-openjdk-1.6.0.0-1.42.1.11.14.el5_10.x86_64
+    # It has apache2: httpd-2.2.3-83.el5.centos.x86_64
+    cd /vagrant
+    yum -q -y install xdotool-2.20110530.1.x86_64.rpm
+    cd -
+else
+    echo Was prepared to run on Ubuntu or CentOS. Detected neither.
+fi
 
 if [ ! -e /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz ]
 then
