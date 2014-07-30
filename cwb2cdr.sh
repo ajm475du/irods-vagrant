@@ -120,7 +120,7 @@ echo VM "\"$CDR\"" has IP number $IP.
 
 if [ "$GULLIBLE" != true ]
 then
-    # Enable X11 tunneling via ssh -X
+    # Enable X11 tunneling via ssh -Y
     VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
             --username vagrant --password vagrant --wait-stdout \
             -- yum -y install xorg-x11-xauth
@@ -141,6 +141,8 @@ then
             --username vagrant --password vagrant
     VBoxManage guestcontrol $CDR copyto `pwd`/cw_in.sh /home/vagrant/vagrant/cw_in.sh \
             --username vagrant --password vagrant
+    VBoxManage guestcontrol $CDR copyto `pwd`/cw_run.sh /home/vagrant/cw_run.sh \
+            --username vagrant --password vagrant
     VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
             --username vagrant --password vagrant --wait-stdout \
             -- mv /home/vagrant/vagrant/tls.sh /vagrant/tls.sh
@@ -153,13 +155,15 @@ then
     VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
             --username vagrant --password vagrant --wait-stdout \
             -- chmod u+x /vagrant/cw_in.sh
+    VBoxManage guestcontrol $CDR exec --image /bin/chmod \
+            --username vagrant --password vagrant --wait-stdout \
+            -- u+x /home/vagrant/cw_run.sh
     VBoxManage guestcontrol $CDR exec --image /usr/bin/sudo \
             --username vagrant --password vagrant --wait-stdout \
             -- mv /home/vagrant/vagrant/$XDO_FILE /vagrant/$XDO_FILE
 fi
 
-echo
-echo The password is not a secret. Please type: vagrant
-ssh -X vagrant@$IP 'sudo su - root -c "cd /vagrant && IRODS_USER=vagrant IRODS_USER_HOME=/home/vagrant IRODS_HOME=/opt/iRODS ./tls.sh"'
-echo Please type the password: vagrant
-ssh -X vagrant@$IP 'sudo su - root -c "cd /vagrant && IRODS_HOME=/opt/iRODS ./cw_in.sh"'
+
+ssh -Y -i ~/.vagrant.d/insecure_private_key vagrant@$IP 'sudo su - root -c "cd /vagrant && IRODS_USER=vagrant IRODS_USER_HOME=/home/vagrant IRODS_HOME=/opt/iRODS ./tls.sh"'
+ssh -Y -i ~/.vagrant.d/insecure_private_key vagrant@$IP 'sudo su - root -c "cd /vagrant && IRODS_HOME=/opt/iRODS ./cw_in.sh"'
+ssh -Y -i ~/.vagrant.d/insecure_private_key vagrant@$IP 'ERASE_EXISTING=true ./cw_run.sh'

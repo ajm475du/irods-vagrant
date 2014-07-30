@@ -16,16 +16,21 @@
 #   the other xdotool invocations. Please do not
 #   micro-optimize it, OK?
 
+ERASE_EXISTING=${ERASE_EXISTING:-false} # DESTRUCTIVE when set to "true"! (quotes are optional)
 
-## Erase a previous test if any,
-## to keep the "test the test" cycle relatively short.
-#pkill -f Workbench
-#[ -e curators-workbench ] && rm -rf curators-workbench
-#[ -e curators-workspace ] && rm -rf curators-workspace
-#[ -e .cache ] && rm -rf .cache
-#tar zxf /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz
-#
-#set -v
+
+if [ "$ERASE_EXISTING" = true ]
+then
+    # Erase a previous test if any,
+    # to keep the "test the test" cycle relatively short.
+    pkill -f Workbench
+    [ -e curators-workbench ] && rm -rf curators-workbench
+    [ -e curators-workspace ] && rm -rf curators-workspace
+    [ -e .cache ] && rm -rf .cache
+    tar zxf /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz
+
+    set -v
+fi
 
 # Curator's Workbench
 cd curators-workbench

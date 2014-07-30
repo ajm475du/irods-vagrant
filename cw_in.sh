@@ -22,7 +22,7 @@ then
     # It has java: java-1.6.0-openjdk-1.6.0.0-1.42.1.11.14.el5_10.x86_64
     # It has apache2: httpd-2.2.3-83.el5.centos.x86_64
     cd /vagrant
-    yum -q -y install xdotool-2.20110530.1.x86_64.rpm
+    yum -q -y --nogpgcheck install xdotool-2.20110530.1-1.x86_64.rpm
     cd -
 else
     echo Was prepared to run on Ubuntu or CentOS. Detected neither.
