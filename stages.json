@@ -1,0 +1,9 @@
+{
+    "tag:cdr.lib.unc.edu,2014:/cdr_projects/":{
+        "name": "Originals",
+        "mappings":[
+            "file:/home/ajm475/originals/",
+            "file:/home/vagrant/originals/"
+        ]
+    }
+}

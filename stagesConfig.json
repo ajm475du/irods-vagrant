@@ -1,0 +1,6 @@
+{
+    "customMappings" :{
+        "tag:cdr.lib.unc.edu,2014:/cdr_projects/":"file:/home/vagrant/originals/"
+    },
+    "repositoryConfigurations": ["file:/var/www/html/static/stages.json"]
+}
