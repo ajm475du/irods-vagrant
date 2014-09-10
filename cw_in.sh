@@ -31,7 +31,7 @@ fi
 if [ ! -e /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz ]
 then
     cd /vagrant
-    wget -q http://www2.lib.unc.edu/software/workbench/4.1.5/products/curators-workbench-linux.gtk.x86_64-jre.tar.gz
+    wget -q http://www2.lib.unc.edu/software/workbench/4.1.4/products/curators-workbench-linux.gtk.x86_64-jre.tar.gz
     cd -
 fi
 su -c 'tar zxf /vagrant/curators-workbench-linux.gtk.x86_64-jre.tar.gz' - ${IRODS_CLIENT_USER}

@@ -14,7 +14,7 @@ CDR_FILE=$CDR.ova
 CDR_BASEURL=$BASEURL/cdr
 
 CWB_FILE=curators-workbench-linux.gtk.x86_64-jre.tar.gz
-CWB_VN=4.1.5
+CWB_VN=4.1.4
 CWB_BASEURL=$BASEURL/workbench/$CWB_VN/products
 
 XDO_FILE=xdotool-2.20110530.1-1.x86_64.rpm
