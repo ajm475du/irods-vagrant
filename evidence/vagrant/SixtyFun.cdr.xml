@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" ID="uuid_08d26119-c505-41ee-bdc4-17d65d6fa79d" LABEL="SixtyFun Workbench Manifest" OBJID="info:fedora/uuid:08d26119-c505-41ee-bdc4-17d65d6fa79d" PROFILE="http://cdr.unc.edu/METS/profiles/Simple" TYPE="WORKBENCH">
+  <mets:metsHdr CREATEDATE="2014-08-01T13:58:21.76Z" LASTMODDATE="2014-08-01T13:58:21.76Z">
+    <mets:agent ROLE="CREATOR" TYPE="OTHER">
+      <mets:name>CDR Workbench</mets:name>
+    </mets:agent>
+    <mets:agent ROLE="CREATOR" TYPE="INDIVIDUAL">
+      <mets:name>ajm475</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:fileSec>
+    <mets:fileGrp ID="OBJECTS">
+      <mets:file CHECKSUM="bd3e687344a54c328191fbee06d8ec12" CHECKSUMTYPE="MD5" CREATED="2014-07-31T16:08:11.000-04:00" ID="f_-1377723503" MIMETYPE="application/octet-stream" SIZE="9735420">
+        <mets:FLocat xlink:href="tag:ajm475@cdr.lib.unc.edu,2014-08-01:/cdr_projects/SixtyFun/_0/home/ajm475/Music/IMSLP298641-PMLP01586-LvBeethoven_Symphony_No.5_mvt1.ogg" LOCTYPE="OTHER" OTHERLOCTYPE="tag" USE="STAGE"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div TYPE="Bag">
+      <mets:div CONTENTIDS="file:/home/ajm475/Music/IMSLP298641-PMLP01586-LvBeethoven_Symphony_No.5_mvt1.ogg info:fedora/uuid:e6c15c2c-a737-4314-91be-210ea8d4cee9" ID="d_-1377723503" LABEL="IMSLP298641-PMLP01586-LvBeethoven_Symphony_No.5_mvt1.ogg" TYPE="File">
+        <mets:fptr FILEID="f_-1377723503"/>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>

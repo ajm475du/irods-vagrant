@@ -1,0 +1,27 @@
+[Sun Nov 10 04:02:15 2013] [notice] Digest: generating secret for digest authentication ...
+[Sun Nov 10 04:02:15 2013] [notice] Digest: done
+[Sun Nov 10 04:02:15 2013] [notice] SSL FIPS mode disabled
+[Sun Nov 10 04:02:15 2013] [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun Nov 10 04:02:15 2013] [warn] RSA server certificate CommonName (CN) `vagrant-centos58' does NOT match server name!?
+[Sun Nov 10 04:02:15 2013] [notice] Apache/2.2.3 (CentOS) configured -- resuming normal operations
+[Mon Nov 11 08:30:27 2013] [notice] caught SIGTERM, shutting down
+[Wed Sep 10 16:31:26 2014] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Wed Sep 10 16:31:26 2014] [notice] SSL FIPS mode disabled
+[Wed Sep 10 16:31:26 2014] [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed Sep 10 16:31:26 2014] [warn] RSA server certificate CommonName (CN) `vagrant-centos58' does NOT match server name!?
+[Wed Sep 10 16:31:26 2014] [notice] Digest: generating secret for digest authentication ...
+[Wed Sep 10 16:31:26 2014] [notice] Digest: done
+[Wed Sep 10 16:31:26 2014] [notice] SSL FIPS mode disabled
+[Wed Sep 10 16:31:26 2014] [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed Sep 10 16:31:26 2014] [warn] RSA server certificate CommonName (CN) `vagrant-centos58' does NOT match server name!?
+[Wed Sep 10 16:31:26 2014] [notice] Apache/2.2.3 (CentOS) configured -- resuming normal operations
+[Wed Sep 10 16:32:01 2014] [error] (111)Connection refused: proxy: AJP: attempt to connect to 127.0.0.1:8009 (localhost) failed
+[Wed Sep 10 16:32:01 2014] [error] ap_proxy_connect_backend disabling worker for (localhost)
+[Wed Sep 10 16:32:01 2014] [error] proxy: AJP: failed to make connection to backend: localhost
+[Wed Sep 10 16:32:21 2014] [error] proxy: AJP: disabled connection for (localhost)
+[Wed Sep 10 16:32:41 2014] [error] proxy: AJP: disabled connection for (localhost)
+[Wed Sep 10 16:36:40 2014] [error] (111)Connection refused: proxy: AJP: attempt to connect to 127.0.0.1:8009 (localhost) failed
+[Wed Sep 10 16:36:40 2014] [error] ap_proxy_connect_backend disabling worker for (localhost)
+[Wed Sep 10 16:36:40 2014] [error] proxy: AJP: failed to make connection to backend: localhost
+[Wed Sep 10 16:37:01 2014] [error] proxy: AJP: disabled connection for (localhost)
+[Wed Sep 10 16:37:21 2014] [error] proxy: AJP: disabled connection for (localhost)

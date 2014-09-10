@@ -1,0 +1,6 @@
+[Sun Nov 10 04:02:15 2013] [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun Nov 10 04:02:15 2013] [warn] RSA server certificate CommonName (CN) `vagrant-centos58' does NOT match server name!?
+[Wed Sep 10 16:31:26 2014] [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed Sep 10 16:31:26 2014] [warn] RSA server certificate CommonName (CN) `vagrant-centos58' does NOT match server name!?
+[Wed Sep 10 16:31:26 2014] [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed Sep 10 16:31:26 2014] [warn] RSA server certificate CommonName (CN) `vagrant-centos58' does NOT match server name!?
